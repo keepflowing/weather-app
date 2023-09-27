@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack'); //to access built-in plugins
+// const webpack = require('webpack'); //to access built-in plugins
 
 module.exports = {
   entry: {
@@ -20,7 +20,7 @@ module.exports = {
 
     new HtmlWebpackPlugin({
 
-      title: 'Todo List',
+      title: 'Weather App',
 
     }),
 
