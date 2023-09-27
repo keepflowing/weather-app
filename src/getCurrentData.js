@@ -1,4 +1,4 @@
-const baseUrl = 'http://api.weatherapi.com/v1/current.json?key=';
+const baseUrl = 'https://api.weatherapi.com/v1/current.json?key=';
 /**
  * Gets data
  * @param {string} city defines which city to get data for
