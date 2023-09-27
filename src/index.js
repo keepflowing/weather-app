@@ -40,6 +40,7 @@ b.addEventListener('click', async () => {
   const data = await getCurrentData(prompt('City?'), key); // prompt('City?');
   cityTitle.innerText = `${data.location.name}`;
   countryName.innerText = `${data.location.country}`;
+  tempFeels.innerHTML = '';
   tempFeels.innerHTML += `<h1>${data.current.temp_c}°C</h1>`;
   tempFeels.innerHTML += `<p>Feels ${data.current.feelslike_c}°C</p>`;
   p.innerHTML += `<br>Current conditions: ${data.current.condition.text}`;
