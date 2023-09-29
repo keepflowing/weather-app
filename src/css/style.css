@@ -12,6 +12,14 @@ body {
   font-family: 'Nunito';
 }
 
+p {
+  text-align: center;
+}
+
+h3 {
+  margin: 1rem;
+}
+
 #content {
   align-items: center;
   display: flex;

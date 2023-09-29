@@ -30,6 +30,9 @@ const tempFeels = document.createElement('div');
 tempFeels.classList.add('flex-column');
 currentTemp.appendChild(tempFeels);
 
+const infoDiv = document.createElement('div');
+infoDiv.className = 'flex-column';
+
 const p = document.createElement('p');
 
 const h3 = document.createElement('h3');
@@ -37,7 +40,14 @@ h3.innerText = 'Forecast:';
 const p2 = document.createElement('p');
 
 b.addEventListener('click', async () => {
-  const data = await getCurrentData(prompt('City?'), key); // prompt('City?');
+  getData(prompt('City?'));
+});
+
+content.appendChild(b);
+content.appendChild(infoDiv);
+
+const getData = async (city) => {
+  const data = await getCurrentData(city, key); // prompt('City?');
   cityTitle.innerText = `${data.location.name}`;
   countryName.innerText = `${data.location.country}`;
   tempFeels.innerHTML = '';
@@ -52,33 +62,17 @@ b.addEventListener('click', async () => {
   p.innerHTML += `<br>Humidity: ${data.current.humidity}%`;
   p.innerHTML += ` | Wind speed: ${data.current.wind_kph} km/h`;
 
-  p2.innerText = `${data.forecast.forecastday[1].date}`;
-  p2.innerHTML += `<br>Max temp: ${data.forecast.forecastday[1].day.maxtemp_c}`;
-  p2.innerHTML += `<br>Min temp: ${data.forecast.forecastday[1].day.mintemp_c}`;
-  document.body.appendChild(p);
-  document.body.appendChild(h3);
-  document.body.appendChild(p2);
-});
+  p2.innerHTML = `${data.forecast.forecastday[1].date}:<br>`;
+  p2.innerHTML += `Max temp: ${data.forecast.forecastday[1].day.maxtemp_c}°C`;
+  p2.innerHTML += '<br>';
+  p2.innerHTML += `Min temp: ${data.forecast.forecastday[1].day.mintemp_c}°C`;
+  p2.innerHTML += `<br><br>${data.forecast.forecastday[2].date}:<br>`;
+  p2.innerHTML += `Max temp: ${data.forecast.forecastday[2].day.maxtemp_c}°C`;
+  p2.innerHTML += '<br>';
+  p2.innerHTML += `Min temp: ${data.forecast.forecastday[2].day.mintemp_c}°C`;
+  infoDiv.appendChild(p);
+  infoDiv.appendChild(h3);
+  infoDiv.appendChild(p2);
+};
 
-content.appendChild(b);
-
-const data = await getCurrentData('London', key); // prompt('City?');
-cityTitle.innerText = `${data.location.name}`;
-countryName.innerText = `${data.location.country}`;
-tempFeels.innerHTML += `<h1>${data.current.temp_c}°C</h1>`;
-tempFeels.innerHTML += `<p>Feels ${data.current.feelslike_c}°C</p>`;
-p.innerHTML += `<br>Current conditions: ${data.current.condition.text}`;
-let iconUrl = [...data.current.condition.icon];
-let urlEnd = iconUrl.splice(35);
-urlEnd = urlEnd.join('');
-iconUrl = 'https://cdn.weatherapi.com/weather/128x128/' + urlEnd;
-condImg.src = iconUrl;
-p.innerHTML += `<br>Humidity: ${data.current.humidity}%`;
-p.innerHTML += ` | Wind speed: ${data.current.wind_kph} km/h`;
-
-p2.innerText = `${data.forecast.forecastday[1].date}`;
-p2.innerHTML += `<br>Max temp: ${data.forecast.forecastday[1].day.maxtemp_c}`;
-p2.innerHTML += `<br>Min temp: ${data.forecast.forecastday[1].day.mintemp_c}`;
-document.body.appendChild(p);
-document.body.appendChild(h3);
-document.body.appendChild(p2);
+getData('London');
