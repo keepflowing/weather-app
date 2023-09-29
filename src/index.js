@@ -36,6 +36,7 @@ infoDiv.className = 'flex-column';
 const p = document.createElement('p');
 
 const h3 = document.createElement('h3');
+h3.className = 'margin-1rem';
 h3.innerText = 'Forecast:';
 const p2 = document.createElement('p');
 
